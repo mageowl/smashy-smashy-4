@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://yxgu1btdghfc"]
+
+[ext_resource type="Script" uid="uid://nj5pm4h0lso0" path="res://scenes/fighter/fighter.gd" id="1_dohvu"]
+[ext_resource type="Texture2D" uid="uid://bo3dxop7kojmx" path="res://scenes/fighter/devil/devil.png" id="2_af5ne"]
+[ext_resource type="Texture2D" uid="uid://n10psmymiblc" path="res://scenes/fighter/marker.png" id="3_af5ne"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fekug"]
+
+[sub_resource type="Gradient" id="Gradient_dohvu"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_af5ne"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_dohvu")
+width = 20
+height = 2
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fekug"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_dohvu")
+width = 8
+height = 1
+
+[node name="Fighter" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_dohvu")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_af5ne")
+hframes = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fekug")
+
+[node name="CooldownBar" type="TextureProgressBar" parent="."]
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 14.0
+max_value = 10.0
+rounded = true
+fill_mode = 6
+texture_progress = SubResource("GradientTexture2D_af5ne")
+
+[node name="Marker" type="Sprite2D" parent="."]
+visible = false
+top_level = true
+texture = ExtResource("3_af5ne")
+offset = Vector2(0, 2.5)
+
+[node name="CooldownBar" type="TextureProgressBar" parent="Marker"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.0
+offset_top = 6.0
+offset_bottom = 7.0
+grow_horizontal = 2
+max_value = 8.0
+rounded = true
+fill_mode = 6
+texture_progress = SubResource("GradientTexture2D_fekug")
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="Marker" method="hide"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="Marker" method="show"]

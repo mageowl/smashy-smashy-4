@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgr0elvxus3ap"]
+
+[ext_resource type="Script" uid="uid://bgy0s5hgld6p0" path="res://scenes/fighter/robot/slam_move.gd" id="1_qhyk2"]
+[ext_resource type="Shader" uid="uid://bmuklqp0esis6" path="res://scenes/fighter/robot/slam_move_particles.gdshader" id="2_fnukq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhyk2"]
+size = Vector2(40, 60)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4y4xd"]
+shader = ExtResource("2_fnukq")
+
+[node name="SlamMove" type="Node2D"]
+show_behind_parent = true
+script = ExtResource("1_qhyk2")
+metadata/_custom_type_script = "uid://bgy0s5hgld6p0"
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 0, -24)
+width = 8.0
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_qhyk2")
+debug_color = Color(1, 0, 0.14901961, 0.41960785)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 5
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ShaderMaterial_4y4xd")
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

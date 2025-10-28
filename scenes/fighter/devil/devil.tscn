@@ -1,0 +1,158 @@
+[gd_scene load_steps=15 format=3 uid="uid://c0ngce10xrisx"]
+
+[ext_resource type="PackedScene" uid="uid://yxgu1btdghfc" path="res://scenes/fighter/fighter.tscn" id="1_5enma"]
+[ext_resource type="PackedScene" uid="uid://dw7iy650fp84i" path="res://scenes/fighter/devil/poke_move.tscn" id="2_svkeb"]
+[ext_resource type="Script" uid="uid://bdueyt4ybtdn5" path="res://scenes/fighter/devil/dash_move.gd" id="3_jhefm"]
+
+[sub_resource type="Animation" id="Animation_mp0yx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ktjma"]
+resource_name = "attack"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_jhefm"]
+resource_name = "fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_vf6rl"]
+resource_name = "jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_74tfn"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.30003694),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_8apja"]
+resource_name = "special"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t08b7"]
+_data = {
+&"RESET": SubResource("Animation_mp0yx"),
+&"attack": SubResource("Animation_ktjma"),
+&"fall": SubResource("Animation_jhefm"),
+&"jump": SubResource("Animation_vf6rl"),
+&"run": SubResource("Animation_74tfn"),
+&"special": SubResource("Animation_8apja")
+}
+
+[sub_resource type="Gradient" id="Gradient_jhefm"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vf6rl"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_jhefm")
+width = 20
+height = 2
+
+[sub_resource type="Gradient" id="Gradient_vf6rl"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_74tfn"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_vf6rl")
+width = 8
+height = 1
+
+[node name="Devil" instance=ExtResource("1_5enma")]
+color = Color(0.7372549, 0.19607843, 0.19607843, 1)
+animation_player = NodePath("AnimationPlayer")
+moveset_attack = NodePath("PokeMove")
+moveset_special = NodePath("DashMove")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_t08b7")
+}
+
+[node name="PokeMove" parent="." index="3" instance=ExtResource("2_svkeb")]
+
+[node name="DashMove" type="Node2D" parent="." index="4"]
+script = ExtResource("3_jhefm")
+metadata/_custom_type_script = "uid://bdueyt4ybtdn5"
+
+[node name="CooldownBar" parent="." index="6"]
+texture_progress = SubResource("GradientTexture2D_vf6rl")
+
+[node name="CooldownBar" parent="Marker" index="0"]
+texture_progress = SubResource("GradientTexture2D_74tfn")

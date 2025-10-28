@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://c302ur1sqsibl"]
+
+[ext_resource type="Shader" uid="uid://btgrcr1q84caq" path="res://scenes/background/background.gdshader" id="1_pesyb"]
+[ext_resource type="Texture2D" uid="uid://d20167f8krs1l" path="res://scenes/background/checkers.png" id="2_rsf5d"]
+[ext_resource type="Shader" uid="uid://g3kvyoilqnyo" path="res://scenes/background/background-3d.gdshader" id="3_rsf5d"]
+
+[sub_resource type="Gradient" id="Gradient_pesyb"]
+colors = PackedColorArray(0.15987271, 0.093735464, 0.15644258, 1, 0.09411765, 0.078431375, 0.09803922, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rsf5d"]
+gradient = SubResource("Gradient_pesyb")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_rsf5d"]
+colors = PackedColorArray(0.09411765, 0.09411765, 0.09411765, 1, 0.078431375, 0.078431375, 0.078431375, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ewwm8"]
+gradient = SubResource("Gradient_rsf5d")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ewwm8"]
+shader = ExtResource("1_pesyb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjv1t"]
+render_priority = 0
+shader = ExtResource("3_rsf5d")
+shader_parameter/color1 = Color(0.06666667, 0.06666667, 0.06666667, 1)
+shader_parameter/color2 = Color(0.078431375, 0.078431375, 0.078431375, 1)
+shader_parameter/color3 = Color(0.13538146, 0.07621125, 0.07435348, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_03sym"]
+material = SubResource("ShaderMaterial_jjv1t")
+flip_faces = true
+bottom_radius = 0.0
+height = 4.0
+cap_top = false
+
+[node name="Background" type="CanvasLayer"]
+layer = -1
+
+[node name="Gradient2" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_rsf5d")
+
+[node name="Gradient1" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ewwm8")
+
+[node name="Checkers" type="TextureRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ewwm8")
+offset_left = 4.48316
+offset_top = -42.127228
+offset_right = 427.63315
+offset_bottom = 238.87277
+rotation = 0.1060205
+texture = ExtResource("2_rsf5d")
+stretch_mode = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(400, 240)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+size = 0.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -2)
+mesh = SubResource("CylinderMesh_03sym")

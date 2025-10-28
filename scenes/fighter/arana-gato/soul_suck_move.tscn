@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://5cvp62wsehjt"]
+
+[ext_resource type="Script" uid="uid://dxxaau4vf85v1" path="res://scenes/fighter/arana-gato/soul_suck_move.gd" id="1_g5hdt"]
+[ext_resource type="Texture2D" uid="uid://cibr0su4caji6" path="res://particle_small.png" id="2_8in26"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5hdt"]
+size = Vector2(200, 40)
+
+[sub_resource type="Curve" id="Curve_d7qx4"]
+_limits = [-2.0, 1.9950562, 0.0, 1.0]
+_data = [Vector2(0, -0.051136255), 0.0, 0.0, 0, 0, Vector2(0.49891865, 1.971076), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ulk6n"]
+curve = SubResource("Curve_d7qx4")
+
+[sub_resource type="Curve" id="Curve_cmxpa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.4439994, 1), 0.0, 0.0, 0, 0, Vector2(0.8646827, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_o4nhb"]
+curve = SubResource("Curve_cmxpa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_es53a"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(80, 0, 0)
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector3(-1, 0, 0)
+spread = 10.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -300.0
+radial_accel_max = -100.0
+radial_accel_curve = SubResource("CurveTexture_ulk6n")
+scale_curve = SubResource("CurveTexture_o4nhb")
+
+[node name="SoulSuckMove" type="Node2D"]
+script = ExtResource("1_g5hdt")
+metadata/_custom_type_script = "uid://dxxaau4vf85v1"
+
+[node name="EffectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EffectArea"]
+shape = SubResource("RectangleShape2D_g5hdt")
+debug_color = Color(0.5641279, 0.558781, 7.70092e-07, 0.41960785)
+
+[node name="SuckParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 40
+texture = ExtResource("2_8in26")
+lifetime = 0.5
+trail_enabled = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_es53a")

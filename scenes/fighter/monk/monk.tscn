@@ -1,0 +1,152 @@
+[gd_scene load_steps=18 format=3 uid="uid://l0dhqj3jj66a"]
+
+[ext_resource type="PackedScene" uid="uid://yxgu1btdghfc" path="res://scenes/fighter/fighter.tscn" id="1_5sndf"]
+[ext_resource type="Texture2D" uid="uid://87l4ocqtu4e8" path="res://oldAssets/fighter/monk.png" id="2_d5acp"]
+[ext_resource type="Texture2D" uid="uid://caslktulpmdsj" path="res://particle.png" id="3_6munl"]
+[ext_resource type="Script" uid="uid://bxrxgh8rujdtx" path="res://scenes/projectile/projectile_move.gd" id="4_x0hhq"]
+[ext_resource type="PackedScene" uid="uid://c4c7eoa8xin1v" path="res://scenes/fighter/monk/holy_fire.tscn" id="5_5l717"]
+[ext_resource type="PackedScene" uid="uid://2gy41d0yfbpx" path="res://scenes/fighter/monk/cross_move.tscn" id="5_bewd8"]
+
+[sub_resource type="Animation" id="Animation_x0hhq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5l717"]
+resource_name = "fall"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_bewd8"]
+resource_name = "jump"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_6munl"]
+resource_name = "run"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gwgwf"]
+_data = {
+&"RESET": SubResource("Animation_x0hhq"),
+&"fall": SubResource("Animation_5l717"),
+&"jump": SubResource("Animation_bewd8"),
+&"run": SubResource("Animation_6munl")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x0hhq"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_bewd8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13038673, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_x0hhq"]
+curve = SubResource("Curve_bewd8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gwgwf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2, 2, 2)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 50.0
+initial_velocity_max = 75.0
+gravity = Vector3(0, 0, 0)
+damping_min = 50.000004
+damping_max = 75.0
+scale_curve = SubResource("CurveTexture_x0hhq")
+color = Color(0.09411765, 0.6117647, 0.76862746, 1)
+
+[sub_resource type="Gradient" id="Gradient_6munl"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x0hhq"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_6munl")
+width = 20
+height = 2
+
+[node name="Monk" instance=ExtResource("1_5sndf")]
+color = Color(0.09411765, 0.6117647, 0.76862746, 1)
+animation_player = NodePath("AnimationPlayer")
+speed = 200.0
+moveset_attack = NodePath("ProjectileMove")
+moveset_special = NodePath("CrossMove")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_d5acp")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+&"": SubResource("AnimationLibrary_gwgwf")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="4"]
+material = SubResource("CanvasItemMaterial_x0hhq")
+position = Vector2(0, -3)
+amount = 20
+texture = ExtResource("3_6munl")
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_gwgwf")
+
+[node name="ProjectileMove" type="Node2D" parent="." index="5"]
+script = ExtResource("4_x0hhq")
+scene = ExtResource("5_5l717")
+metadata/_custom_type_script = "uid://bxrxgh8rujdtx"
+
+[node name="CrossMove" parent="." index="6" instance=ExtResource("5_bewd8")]
+cooldown = 3.0
+
+[node name="CooldownBar" parent="." index="7"]
+texture_progress = SubResource("GradientTexture2D_x0hhq")

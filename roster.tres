@@ -1,0 +1,109 @@
+[gd_resource type="Resource" script_class="Roster" load_steps=30 format=3 uid="uid://c2jecj5wpkvkq"]
+
+[ext_resource type="Script" uid="uid://ecnpluubb3ev" path="res://scenes/menu/character_select/fighter_config.gd" id="1_eqpie"]
+[ext_resource type="PackedScene" uid="uid://b0xr0jrmprqhl" path="res://scenes/fighter/preview/devil_preview.tscn" id="2_hfplq"]
+[ext_resource type="PackedScene" uid="uid://c0ngce10xrisx" path="res://scenes/fighter/devil/devil.tscn" id="2_s8yyl"]
+[ext_resource type="Texture2D" uid="uid://bo3dxop7kojmx" path="res://scenes/fighter/devil/devil.png" id="3_ymkx8"]
+[ext_resource type="PackedScene" uid="uid://l0dhqj3jj66a" path="res://scenes/fighter/monk/monk.tscn" id="4_66j2l"]
+[ext_resource type="PackedScene" uid="uid://d8nuf28wxt7a" path="res://scenes/fighter/preview/monk_preview.tscn" id="5_besnj"]
+[ext_resource type="Texture2D" uid="uid://87l4ocqtu4e8" path="res://oldAssets/fighter/monk.png" id="5_tedt8"]
+[ext_resource type="PackedScene" uid="uid://dm83y0se4y7ec" path="res://scenes/fighter/robot/robot.tscn" id="6_mtq8c"]
+[ext_resource type="Texture2D" uid="uid://dupm00srg3bmi" path="res://scenes/fighter/robot/robot.png" id="7_r8lor"]
+[ext_resource type="PackedScene" uid="uid://dqd640u6842ce" path="res://scenes/fighter/preview/robot_preview.tscn" id="8_1ledm"]
+[ext_resource type="Script" uid="uid://bckdoox83b6n6" path="res://scenes/menu/character_select/roster.gd" id="8_hfplq"]
+[ext_resource type="PackedScene" uid="uid://bkk267vpvhfcf" path="res://scenes/fighter/fish_with_lipstick/fish_w_lipstick.tscn" id="8_r8lor"]
+[ext_resource type="Texture2D" uid="uid://cil1p1bpmj1va" path="res://scenes/fighter/fish_with_lipstick/fish_with_lipstick.png" id="9_hfplq"]
+[ext_resource type="PackedScene" uid="uid://bpk1pvsnmw0mo" path="res://scenes/fighter/astronaut/astronaut.tscn" id="13_37t7o"]
+[ext_resource type="Texture2D" uid="uid://c5o4eu62vyu3p" path="res://scenes/fighter/astronaut/astronaut.png" id="14_hx42v"]
+[ext_resource type="PackedScene" uid="uid://dwsciyai54n24" path="res://scenes/fighter/arana-gato/arana-gato.tscn" id="15_acsd4"]
+[ext_resource type="Texture2D" uid="uid://bmj2vprfk5yoe" path="res://scenes/fighter/arana-gato/arana-gato.png" id="16_j8p4w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66j2l"]
+atlas = ExtResource("3_ymkx8")
+region = Rect2(0, 0, 20, 0)
+
+[sub_resource type="Resource" id="Resource_tedt8"]
+script = ExtResource("1_eqpie")
+texture = SubResource("AtlasTexture_66j2l")
+name = "Devil"
+color = Color(0.32941177, 0.023529412, 0.16470589, 1)
+preview_scene = ExtResource("2_hfplq")
+scene = ExtResource("2_s8yyl")
+name_attack = "poke"
+name_special = "dash"
+metadata/_custom_type_script = "uid://ecnpluubb3ev"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqpie"]
+atlas = ExtResource("5_tedt8")
+region = Rect2(0, 0, 20, 0)
+
+[sub_resource type="Resource" id="Resource_mtq8c"]
+script = ExtResource("1_eqpie")
+texture = SubResource("AtlasTexture_eqpie")
+name = "Monk"
+color = Color(0.015686275, 0.20784314, 0.28627452, 1)
+preview_scene = ExtResource("5_besnj")
+scene = ExtResource("4_66j2l")
+name_attack = "holy fire"
+name_special = "cross"
+metadata/_custom_type_script = "uid://ecnpluubb3ev"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_besnj"]
+atlas = ExtResource("7_r8lor")
+region = Rect2(0, 0, 20, 0)
+
+[sub_resource type="Resource" id="Resource_1ledm"]
+script = ExtResource("1_eqpie")
+texture = SubResource("AtlasTexture_besnj")
+name = "Robot"
+color = Color(0.6509804, 0.28627452, 0.16862746, 1)
+preview_scene = ExtResource("8_1ledm")
+scene = ExtResource("6_mtq8c")
+name_attack = "slam"
+name_special = "hover"
+metadata/_custom_type_script = "uid://ecnpluubb3ev"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ledm"]
+atlas = ExtResource("9_hfplq")
+region = Rect2(0, 0, 20, 0)
+
+[sub_resource type="Resource" id="Resource_w8fyd"]
+script = ExtResource("1_eqpie")
+texture = SubResource("AtlasTexture_1ledm")
+name = "Fish With Lipstick"
+color = Color(0.023529412, 0.34901962, 0.46666667, 1)
+scene = ExtResource("8_r8lor")
+name_attack = "jab"
+name_special = "harpoon"
+metadata/_custom_type_script = "uid://ecnpluubb3ev"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acsd4"]
+atlas = ExtResource("14_hx42v")
+region = Rect2(0, 0, 20, 0)
+
+[sub_resource type="Resource" id="Resource_j8p4w"]
+script = ExtResource("1_eqpie")
+texture = SubResource("AtlasTexture_acsd4")
+name = "Astronaut"
+color = Color(0.25882354, 0.11764706, 0.37254903, 1)
+scene = ExtResource("13_37t7o")
+name_attack = "stargun"
+name_special = "parry"
+metadata/_custom_type_script = "uid://ecnpluubb3ev"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41kdc"]
+atlas = ExtResource("16_j8p4w")
+region = Rect2(0, 0, 20, 0)
+
+[sub_resource type="Resource" id="Resource_qa3ts"]
+script = ExtResource("1_eqpie")
+texture = SubResource("AtlasTexture_41kdc")
+name = "kitten"
+color = Color(0.36078432, 0.19607843, 0.13333334, 1)
+scene = ExtResource("15_acsd4")
+metadata/_custom_type_script = "uid://ecnpluubb3ev"
+
+[resource]
+script = ExtResource("8_hfplq")
+fighters = Array[ExtResource("1_eqpie")]([SubResource("Resource_tedt8"), SubResource("Resource_mtq8c"), SubResource("Resource_1ledm"), SubResource("Resource_w8fyd"), SubResource("Resource_j8p4w"), SubResource("Resource_qa3ts")])
+metadata/_custom_type_script = "uid://bckdoox83b6n6"

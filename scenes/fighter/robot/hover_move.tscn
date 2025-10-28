@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxgubnoiwidqk"]
+
+[ext_resource type="Script" uid="uid://cfsdhgeup1360" path="res://scenes/fighter/robot/hover_move.gd" id="1_e2h7i"]
+[ext_resource type="Texture2D" uid="uid://caslktulpmdsj" path="res://particle.png" id="2_ftm1a"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g8k5t"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_8t44b"]
+_data = [Vector2(0, 0), 0.0, 19.699217, 0, 0, Vector2(0.15023772, 1), 0.0, 0.049478795, 0, 0, Vector2(1, 0), -0.031197935, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6ok3p"]
+curve = SubResource("Curve_8t44b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fi6y2"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 50.0
+initial_velocity_max = 75.0
+gravity = Vector3(0, 0, 0)
+damping_min = 50.000004
+damping_max = 75.0
+scale_curve = SubResource("CurveTexture_6ok3p")
+color = Color(0.96862745, 0.7490196, 0.28235295, 1)
+
+[node name="HoverMove" type="Node2D"]
+script = ExtResource("1_e2h7i")
+metadata/_custom_type_script = "uid://cfsdhgeup1360"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_g8k5t")
+position = Vector2(0, 11)
+emitting = false
+amount = 15
+texture = ExtResource("2_ftm1a")
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_fi6y2")

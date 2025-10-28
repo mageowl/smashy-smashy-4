@@ -1,0 +1,227 @@
+[gd_scene load_steps=14 format=3 uid="uid://bsssija37vh53"]
+
+[ext_resource type="Script" uid="uid://g1v07tajq26g" path="res://scenes/menu/character_select/character_select.gd" id="1_vffxf"]
+[ext_resource type="PackedScene" uid="uid://c302ur1sqsibl" path="res://scenes/background/background.tscn" id="2_0frw4"]
+[ext_resource type="FontFile" uid="uid://6yj1eecbsen6" path="res://paxel.ttf" id="3_nbeft"]
+[ext_resource type="Texture2D" uid="uid://b4x7ohg0kdk8i" path="res://oldAssets/selector_p1.png" id="4_0frw4"]
+[ext_resource type="Script" uid="uid://dxv4e435462mn" path="res://scenes/menu/blink_text_effect.gd" id="4_bhgn4"]
+[ext_resource type="Texture2D" uid="uid://clbfkm7kb2qml" path="res://oldAssets/selector_p2.png" id="5_nbeft"]
+[ext_resource type="Texture2D" uid="uid://bgqwnfq2u4ru0" path="res://scenes/menu/character_select/overlay_left.png" id="6_jl25w"]
+[ext_resource type="Texture2D" uid="uid://1xoorxto630i" path="res://scenes/menu/character_select/overlay_right.png" id="7_mfswr"]
+[ext_resource type="PackedScene" uid="uid://crhp18airi8du" path="res://scenes/menu/quit_prompt.tscn" id="8_jn812"]
+[ext_resource type="PackedScene" uid="uid://ck80dviraq5o2" path="res://scenes/menu/main_menu/main_menu.tscn" id="9_bhgn4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m7y3p"]
+font = ExtResource("3_nbeft")
+font_size = 8
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_xlkkj"]
+script = ExtResource("4_bhgn4")
+metadata/_custom_type_script = "uid://dxv4e435462mn"
+
+[sub_resource type="LabelSettings" id="LabelSettings_jn812"]
+font = ExtResource("3_nbeft")
+font_size = 8
+font_color = Color(0, 0, 0, 1)
+
+[node name="CharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vffxf")
+
+[node name="Background" parent="." instance=ExtResource("2_0frw4")]
+
+[node name="Play" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.5
+offset_top = 32.0
+offset_right = 34.5
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "fighter select"
+label_settings = SubResource("LabelSettings_m7y3p")
+uppercase = true
+
+[node name="StartPrompt" type="RichTextLabel" parent="."]
+visible = false
+clip_contents = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -31.0
+offset_right = 46.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("3_nbeft")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "press [flash speed=0.25]SPACE[/flash] to start"
+scroll_active = false
+horizontal_alignment = 1
+custom_effects = [SubResource("RichTextEffect_xlkkj")]
+
+[node name="Fighters" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 4
+
+[node name="SelectorP1" type="Sprite2D" parent="."]
+position = Vector2(140, 90)
+texture = ExtResource("4_0frw4")
+centered = false
+
+[node name="SelectorP2" type="Sprite2D" parent="."]
+position = Vector2(140, 90)
+texture = ExtResource("5_nbeft")
+centered = false
+
+[node name="FighterP1" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -113.0
+offset_bottom = 240.0
+
+[node name="Background" type="ColorRect" parent="FighterP1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="TextureRect" parent="FighterP1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_jl25w")
+
+[node name="Name" type="Label" parent="FighterP1"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 41.0
+offset_bottom = 12.0
+text = "the devil"
+label_settings = SubResource("LabelSettings_jn812")
+
+[node name="Attack" type="Label" parent="FighterP1"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 211.0
+offset_right = 94.0
+offset_bottom = 219.0
+text = "poke"
+label_settings = SubResource("LabelSettings_jn812")
+
+[node name="Special" type="Label" parent="FighterP1"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 225.0
+offset_right = 94.0
+offset_bottom = 233.0
+text = "dash"
+label_settings = SubResource("LabelSettings_jn812")
+
+[node name="FighterP2" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1.0
+offset_right = 114.0
+offset_bottom = 240.0
+grow_horizontal = 0
+
+[node name="Background" type="ColorRect" parent="FighterP2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="TextureRect" parent="FighterP2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_mfswr")
+
+[node name="Name" type="Label" parent="FighterP2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -41.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 12.0
+grow_horizontal = 0
+text = "the monk"
+label_settings = SubResource("LabelSettings_jn812")
+horizontal_alignment = 2
+
+[node name="Attack" type="Label" parent="FighterP2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -29.0
+offset_right = -56.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "poke"
+label_settings = SubResource("LabelSettings_jn812")
+horizontal_alignment = 2
+
+[node name="Special" type="Label" parent="FighterP2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -15.0
+offset_right = -56.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "dash"
+label_settings = SubResource("LabelSettings_jn812")
+horizontal_alignment = 2
+
+[node name="QuitPrompt" parent="." instance=ExtResource("8_jn812")]
+next_scene = ExtResource("9_bhgn4")

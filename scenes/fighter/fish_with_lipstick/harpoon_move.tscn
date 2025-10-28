@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://mnb1g064h64b"]
+
+[ext_resource type="Script" uid="uid://537k6mo2rpw4" path="res://scenes/fighter/fish_with_lipstick/harpoon_move.gd" id="1_oavpd"]
+
+[sub_resource type="Curve" id="Curve_oavpd"]
+_data = [Vector2(0, 0.029597998), 0.0, -0.0072882553, 0, 1, Vector2(0.65638053, 0.024814129), -0.0072882553, 0.0, 1, 0, Vector2(0.8586133, 0.9952161), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oavpd"]
+radius = 5.0
+
+[node name="HarpoonMove" type="Node2D"]
+script = ExtResource("1_oavpd")
+metadata/_custom_type_script = "uid://537k6mo2rpw4"
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 150, 0, 160, 0, 200, 0)
+width_curve = SubResource("Curve_oavpd")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("CircleShape2D_oavpd")
+target_position = Vector2(200, 0)
+collision_mask = 7
+collide_with_areas = true

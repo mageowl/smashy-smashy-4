@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw7iy650fp84i"]
+
+[ext_resource type="Script" uid="uid://b80bw28u5dgvk" path="res://scenes/fighter/devil/poke_move.gd" id="1_nykuh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nykuh"]
+size = Vector2(80, 20)
+
+[node name="PokeMove" type="Node2D"]
+script = ExtResource("1_nykuh")
+metadata/_custom_type_script = "uid://b80bw28u5dgvk"
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_nykuh")
+debug_color = Color(1, 0, 0.14901961, 0.41960785)

@@ -1,0 +1,155 @@
+[gd_scene load_steps=14 format=3 uid="uid://dm83y0se4y7ec"]
+
+[ext_resource type="PackedScene" uid="uid://yxgu1btdghfc" path="res://scenes/fighter/fighter.tscn" id="1_i2onn"]
+[ext_resource type="Texture2D" uid="uid://dupm00srg3bmi" path="res://scenes/fighter/robot/robot.png" id="2_e3vpk"]
+[ext_resource type="PackedScene" uid="uid://bxgubnoiwidqk" path="res://scenes/fighter/robot/hover_move.tscn" id="3_i2onn"]
+[ext_resource type="PackedScene" uid="uid://bgr0elvxus3ap" path="res://scenes/fighter/robot/slam_move.tscn" id="4_e3vpk"]
+
+[sub_resource type="Gradient" id="Gradient_ga0s0"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4ymqa"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_ga0s0")
+width = 20
+height = 2
+
+[sub_resource type="Animation" id="Animation_0rr1h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_i2onn"]
+resource_name = "attack"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_7tcmf"]
+resource_name = "fall"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
+[sub_resource type="Animation" id="Animation_kjs2x"]
+resource_name = "jump"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_t2lp6"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_g08kb"]
+resource_name = "special"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wvdfx"]
+_data = {
+&"RESET": SubResource("Animation_0rr1h"),
+&"attack": SubResource("Animation_i2onn"),
+&"fall": SubResource("Animation_7tcmf"),
+&"jump": SubResource("Animation_kjs2x"),
+&"run": SubResource("Animation_t2lp6"),
+&"special": SubResource("Animation_g08kb")
+}
+
+[node name="Robot" instance=ExtResource("1_i2onn")]
+color = Color(0.96862745, 0.7490196, 0.28235295, 1)
+animation_player = NodePath("AnimationPlayer")
+midair_jumps = 1
+moveset_attack = NodePath("SlamMove")
+moveset_special = NodePath("HoverMove")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_e3vpk")
+hframes = 11
+
+[node name="CooldownBar" parent="." index="3"]
+texture_progress = SubResource("GradientTexture2D_4ymqa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_wvdfx")
+}
+
+[node name="HoverMove" parent="." index="6" instance=ExtResource("3_i2onn")]
+cooldown = 1.0
+
+[node name="SlamMove" parent="." index="7" instance=ExtResource("4_e3vpk")]

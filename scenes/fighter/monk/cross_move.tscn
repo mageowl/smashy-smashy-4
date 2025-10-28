@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://2gy41d0yfbpx"]
+
+[ext_resource type="Script" uid="uid://dcf7pjeesyup6" path="res://scenes/fighter/monk/cross_move.gd" id="1_sjk1t"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sjk1t"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m6i8q"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjk1t"]
+size = Vector2(400, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6i8q"]
+size = Vector2(20, 240)
+
+[node name="CrossMove" type="Node2D"]
+visible = false
+script = ExtResource("1_sjk1t")
+metadata/_custom_type_script = "uid://dcf7pjeesyup6"
+
+[node name="Horizontal" type="Line2D" parent="."]
+top_level = true
+material = SubResource("CanvasItemMaterial_sjk1t")
+points = PackedVector2Array(0, 0, 400, 0)
+
+[node name="Vertical" type="Line2D" parent="."]
+top_level = true
+material = SubResource("CanvasItemMaterial_m6i8q")
+points = PackedVector2Array(0, 0, 0, 240)
+
+[node name="Collider" type="Area2D" parent="."]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="HorizontalShape" type="CollisionShape2D" parent="Collider"]
+position = Vector2(200, 0)
+shape = SubResource("RectangleShape2D_sjk1t")
+debug_color = Color(1, 0, 0.14901961, 0.41960785)
+
+[node name="VerticalShape" type="CollisionShape2D" parent="Collider"]
+position = Vector2(0, 120)
+shape = SubResource("RectangleShape2D_m6i8q")
+debug_color = Color(1, 0, 0.14901961, 0.41960785)

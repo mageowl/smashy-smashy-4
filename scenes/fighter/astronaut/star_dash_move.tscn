@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctxgx3xxvrlxe"]
+
+[ext_resource type="Script" uid="uid://ka11jf6menoj" path="res://scenes/fighter/astronaut/star_dash_move.gd" id="1_ivwrl"]
+[ext_resource type="Texture2D" uid="uid://ucjihnji3l36" path="res://scenes/fighter/astronaut/particle.png" id="2_mlrdv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mlrdv"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_0ou0c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fglg5"]
+curve = SubResource("Curve_0ou0c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nje47"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 98, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_fglg5")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ivwrl"]
+size = Vector2(128, 60)
+
+[node name="StarDashMove" type="Node2D"]
+script = ExtResource("1_ivwrl")
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+z_index = -2
+z_as_relative = false
+points = PackedVector2Array(0, 0, 50, -30)
+width = 6.0
+default_color = Color(0.8666667, 0.54509807, 0.90588236, 1)
+end_cap_mode = 2
+
+[node name="LandParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_mlrdv")
+emitting = false
+amount = 20
+texture = ExtResource("2_mlrdv")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_nje47")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_ivwrl")
+debug_color = Color(1, 0, 0.14901961, 0.41960785)

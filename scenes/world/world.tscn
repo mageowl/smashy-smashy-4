@@ -1,0 +1,176 @@
+[gd_scene load_steps=25 format=3 uid="uid://cneliatsctl38"]
+
+[ext_resource type="Script" uid="uid://b3p51ve4jtb3" path="res://scenes/world/world.gd" id="1_6m72w"]
+[ext_resource type="PackedScene" uid="uid://c302ur1sqsibl" path="res://scenes/background/background.tscn" id="2_t5ptc"]
+[ext_resource type="PackedScene" uid="uid://cdsk6o7a8yvl0" path="res://scenes/floor/floor.tscn" id="2_v5dby"]
+[ext_resource type="Texture2D" uid="uid://caslktulpmdsj" path="res://particle.png" id="4_bq33v"]
+[ext_resource type="FontFile" uid="uid://6yj1eecbsen6" path="res://paxel.ttf" id="5_bq33v"]
+[ext_resource type="PackedScene" uid="uid://bsssija37vh53" path="res://scenes/menu/character_select/character_select.tscn" id="7_bq33v"]
+[ext_resource type="PackedScene" uid="uid://crhp18airi8du" path="res://scenes/menu/quit_prompt.tscn" id="7_j2gmx"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ppyta"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_ykrsh"]
+colors = PackedColorArray(0.91282153, 0.25318217, 0.3736917, 1, 0.99999994, 0.40897888, 0.23671722, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g14j6"]
+gradient = SubResource("Gradient_ykrsh")
+
+[sub_resource type="Gradient" id="Gradient_vbegm"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ehkex"]
+gradient = SubResource("Gradient_vbegm")
+
+[sub_resource type="Curve" id="Curve_xersf"]
+_data = [Vector2(0.42717135, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.4706872, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_00tp4"]
+curve = SubResource("Curve_xersf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_77dp3"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(200, 0, 0)
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 10, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_00tp4")
+color_ramp = SubResource("GradientTexture1D_ehkex")
+color_initial_ramp = SubResource("GradientTexture1D_g14j6")
+
+[sub_resource type="Curve" id="Curve_6uqi0"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 34.087112), 14.265826, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ppyta"]
+curve = SubResource("Curve_6uqi0")
+
+[sub_resource type="Curve" id="Curve_ykrsh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.2837567, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g14j6"]
+curve = SubResource("Curve_ykrsh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vbegm"]
+particle_flag_disable_z = true
+direction = Vector3(0, -10, 0)
+spread = 10.0
+initial_velocity_min = 300.0
+initial_velocity_max = 600.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 29.999996
+linear_accel_max = 99.99999
+damping_min = 1.0
+damping_max = 100.00001
+damping_curve = SubResource("CurveTexture_ppyta")
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_g14j6")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6m72w"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_6m72w"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_j2gmx"]
+font = ExtResource("5_bq33v")
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_gb53w"]
+font = ExtResource("5_bq33v")
+font_size = 8
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_6m72w")
+
+[node name="Background" parent="." instance=ExtResource("2_t5ptc")]
+
+[node name="Floor" parent="." instance=ExtResource("2_v5dby")]
+position = Vector2(200, 200)
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
+position = Vector2(200, 120)
+
+[node name="Fighters" type="Node2D" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(2, 1)
+repeat_size = Vector2(400, 0)
+
+[node name="Fire" type="GPUParticles2D" parent="Parallax2D"]
+material = SubResource("CanvasItemMaterial_ppyta")
+position = Vector2(200, 246)
+amount = 300
+texture = ExtResource("4_bq33v")
+lifetime = 0.5
+preprocess = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_77dp3")
+
+[node name="KillFX" type="GPUParticles2D" parent="."]
+position = Vector2(39, 240)
+rotation = 0.47517502
+emitting = false
+texture = ExtResource("4_bq33v")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.84
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_vbegm")
+
+[node name="KillLine" type="Line2D" parent="."]
+material = SubResource("CanvasItemMaterial_6m72w")
+points = PackedVector2Array(200, 120, 0, 0)
+width = 0.0
+width_curve = SubResource("Curve_6m72w")
+default_color = Color(1, 1, 1, 0.49803922)
+
+[node name="Scoreboard" type="CanvasLayer" parent="."]
+
+[node name="Player1Score" type="Label" parent="Scoreboard"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -209.0
+offset_top = 26.0
+offset_right = -204.0
+offset_bottom = 34.0
+grow_horizontal = 0
+text = "0"
+label_settings = SubResource("LabelSettings_j2gmx")
+horizontal_alignment = 2
+
+[node name="Player2Score" type="Label" parent="Scoreboard"]
+unique_name_in_owner = true
+offset_left = 205.0
+offset_top = 26.0
+offset_right = 210.0
+offset_bottom = 34.0
+text = "0"
+label_settings = SubResource("LabelSettings_gb53w")
+
+[node name="ColorRect" type="ColorRect" parent="Scoreboard"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = 29.0
+offset_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+color = Color(0.28731406, 0.2873141, 0.28731406, 1)
+
+[node name="QuitPrompt" parent="." instance=ExtResource("7_j2gmx")]
+next_scene = ExtResource("7_bq33v")
+
+[connection signal="accepted" from="QuitPrompt" to="." method="_on_quit_prompt_accepted"]

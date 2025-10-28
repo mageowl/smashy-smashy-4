@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4c7eoa8xin1v"]
+
+[ext_resource type="Script" uid="uid://cyxq26r37bbnu" path="res://scenes/fighter/monk/holy_fire.gd" id="1_n80fp"]
+[ext_resource type="Texture2D" uid="uid://caslktulpmdsj" path="res://particle.png" id="2_x4aqp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n80fp"]
+radius = 4.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ido0c"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_w7xo3"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13038673, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5l717"]
+curve = SubResource("Curve_w7xo3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7vdml"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2, 2, 2)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 50.0
+initial_velocity_max = 75.0
+gravity = Vector3(0, 0, 0)
+damping_min = 50.000004
+damping_max = 75.0
+scale_curve = SubResource("CurveTexture_5l717")
+color = Color(0.09411765, 0.6117647, 0.76862746, 1)
+
+[node name="HolyFire" type="CharacterBody2D"]
+top_level = true
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_n80fp")
+speed = 500.0
+acceleration = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_n80fp")
+debug_color = Color(1, 0, 0.14901961, 0.41960785)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_ido0c")
+amount = 20
+texture = ExtResource("2_x4aqp")
+lifetime = 0.4
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_7vdml")
+
+[connection signal="finished" from="GPUParticles2D" to="GPUParticles2D" method="queue_free"]

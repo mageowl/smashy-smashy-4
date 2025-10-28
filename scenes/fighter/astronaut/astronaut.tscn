@@ -1,0 +1,198 @@
+[gd_scene load_steps=19 format=3 uid="uid://bpk1pvsnmw0mo"]
+
+[ext_resource type="PackedScene" uid="uid://yxgu1btdghfc" path="res://scenes/fighter/fighter.tscn" id="1_2prrx"]
+[ext_resource type="Texture2D" uid="uid://c5o4eu62vyu3p" path="res://scenes/fighter/astronaut/astronaut.png" id="2_it52x"]
+[ext_resource type="Script" uid="uid://bxrxgh8rujdtx" path="res://scenes/projectile/projectile_move.gd" id="3_h4urv"]
+[ext_resource type="PackedScene" uid="uid://cnyk44vii05s4" path="res://scenes/fighter/astronaut/star_projectile.tscn" id="4_h7q73"]
+[ext_resource type="Script" uid="uid://caip5hihqva7f" path="res://scenes/fighter/parry_move.gd" id="5_h7q73"]
+[ext_resource type="PackedScene" uid="uid://ctxgx3xxvrlxe" path="res://scenes/fighter/astronaut/star_dash_move.tscn" id="6_iwm6j"]
+
+[sub_resource type="Gradient" id="Gradient_it52x"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6mlwf"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_it52x")
+width = 20
+height = 2
+
+[sub_resource type="Gradient" id="Gradient_h7q73"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iwm6j"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_h7q73")
+width = 8
+height = 1
+
+[sub_resource type="Animation" id="Animation_h4urv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tvk6x"]
+resource_name = "attack"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_iwm6j"]
+resource_name = "fall"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_h7q73"]
+resource_name = "jump"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_e3g5o"]
+resource_name = "parry_trigger"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [10, 11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_6mlwf"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_d2tky"]
+resource_name = "special"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e3g5o"]
+_data = {
+&"RESET": SubResource("Animation_h4urv"),
+&"attack": SubResource("Animation_tvk6x"),
+&"fall": SubResource("Animation_iwm6j"),
+&"jump": SubResource("Animation_h7q73"),
+&"parry_trigger": SubResource("Animation_e3g5o"),
+&"run": SubResource("Animation_6mlwf"),
+&"special": SubResource("Animation_d2tky")
+}
+
+[node name="Astronaut" instance=ExtResource("1_2prrx")]
+color = Color(0.7137255, 0.3529412, 0.81960785, 1)
+animation_player = NodePath("AnimationPlayer")
+gravity = 500.0
+jump_gravity = 500.0
+moveset_attack = NodePath("ProjectileMove")
+moveset_special = NodePath("ParryMove")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_it52x")
+hframes = 13
+
+[node name="CooldownBar" parent="." index="3"]
+texture_progress = SubResource("GradientTexture2D_6mlwf")
+
+[node name="CooldownBar" parent="Marker" index="0"]
+texture_progress = SubResource("GradientTexture2D_iwm6j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_e3g5o")
+}
+
+[node name="ProjectileMove" type="Node2D" parent="." index="6"]
+script = ExtResource("3_h4urv")
+scene = ExtResource("4_h7q73")
+metadata/_custom_type_script = "uid://bxrxgh8rujdtx"
+
+[node name="ParryMove" type="Node2D" parent="." index="7"]
+script = ExtResource("5_h7q73")
+trigger = NodePath("StarDashMove")
+metadata/_custom_type_script = "uid://caip5hihqva7f"
+
+[node name="StarDashMove" parent="ParryMove" index="0" instance=ExtResource("6_iwm6j")]
+lift = 200.0
+cooldown = 0.5
