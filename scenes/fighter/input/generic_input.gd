@@ -2,6 +2,9 @@
 @icon("Game")
 class_name GenericInput
 
+@abstract func get_move_prompt() -> Texture
+@abstract func get_attack_prompt() -> Texture
+
 @abstract func is_up_pressed() -> bool
 @abstract func is_down_pressed() -> bool
 @abstract func is_left_pressed() -> bool

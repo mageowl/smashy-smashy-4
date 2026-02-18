@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://bns45cicv6eh0"]
+
+[ext_resource type="Texture2D" uid="uid://c5o4eu62vyu3p" path="res://scenes/fighter/astronaut/astronaut.png" id="1_2b70h"]
+[ext_resource type="Script" uid="uid://dwqomqodfrqr3" path="res://scenes/fighter/preview/fighter_preview.gd" id="2_1jaam"]
+
+[sub_resource type="Animation" id="Animation_gxmuk"]
+resource_name = "play"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 2.5, 2.6, 2.6999993, 2.7999997, 2.8999996, 2.9999995, 3.1, 3.1999993, 3.2999997, 3.3999996, 3.5999994),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2, 3, 4, 1, 2, 3, 4, 0, 0, 1, 2, 3, 4, 1, 2, 3, 4, 0, 9]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"jump"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2b70h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdkuj"]
+_data = {
+&"RESET": SubResource("Animation_2b70h"),
+&"play": SubResource("Animation_gxmuk")
+}
+
+[node name="AstronautPreview" type="Sprite2D"]
+texture = ExtResource("1_2b70h")
+hframes = 13
+frame = 1
+script = ExtResource("2_1jaam")
+animation_player = NodePath("AnimationPlayer")
+fall_frame = 6
+jump_frame = 5
+gravity = 500.0
+jump_gravity = 500.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hdkuj")
+}

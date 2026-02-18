@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://g5dfd0r0attm"]
+
+[ext_resource type="Theme" uid="uid://b5yk65c4e76r" path="res://theme.tres" id="1_dghdp"]
+[ext_resource type="Script" uid="uid://dyua1oxmopqtd" path="res://scenes/menu/options/slider_option.gd" id="2_n1258"]
+
+[node name="SliderOption" type="HBoxContainer"]
+theme = ExtResource("1_dghdp")
+script = ExtResource("2_n1258")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Option"
+
+[node name="Percent" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100%"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[connection signal="drag_ended" from="HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_value_changed"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Roster" load_steps=30 format=3 uid="uid://c2jecj5wpkvkq"]
+[gd_resource type="Resource" script_class="Roster" load_steps=33 format=3 uid="uid://c2jecj5wpkvkq"]
 
 [ext_resource type="Script" uid="uid://ecnpluubb3ev" path="res://scenes/menu/character_select/fighter_config.gd" id="1_eqpie"]
 [ext_resource type="PackedScene" uid="uid://b0xr0jrmprqhl" path="res://scenes/fighter/preview/devil_preview.tscn" id="2_hfplq"]
@@ -13,10 +13,13 @@
 [ext_resource type="Script" uid="uid://bckdoox83b6n6" path="res://scenes/menu/character_select/roster.gd" id="8_hfplq"]
 [ext_resource type="PackedScene" uid="uid://bkk267vpvhfcf" path="res://scenes/fighter/fish_with_lipstick/fish_w_lipstick.tscn" id="8_r8lor"]
 [ext_resource type="Texture2D" uid="uid://cil1p1bpmj1va" path="res://scenes/fighter/fish_with_lipstick/fish_with_lipstick.png" id="9_hfplq"]
+[ext_resource type="PackedScene" uid="uid://n1etd134ssjl" path="res://scenes/fighter/preview/fish_preview.tscn" id="11_j8p4w"]
 [ext_resource type="PackedScene" uid="uid://bpk1pvsnmw0mo" path="res://scenes/fighter/astronaut/astronaut.tscn" id="13_37t7o"]
+[ext_resource type="PackedScene" uid="uid://bns45cicv6eh0" path="res://scenes/fighter/preview/astronaut_preview.tscn" id="14_41kdc"]
 [ext_resource type="Texture2D" uid="uid://c5o4eu62vyu3p" path="res://scenes/fighter/astronaut/astronaut.png" id="14_hx42v"]
-[ext_resource type="PackedScene" uid="uid://dwsciyai54n24" path="res://scenes/fighter/arana-gato/arana-gato.tscn" id="15_acsd4"]
-[ext_resource type="Texture2D" uid="uid://bmj2vprfk5yoe" path="res://scenes/fighter/arana-gato/arana-gato.png" id="16_j8p4w"]
+[ext_resource type="PackedScene" uid="uid://dwsciyai54n24" path="res://scenes/fighter/araña_gato/araña_gato.tscn" id="17_41kdc"]
+[ext_resource type="PackedScene" uid="uid://vcvr6cv87lf" path="res://scenes/fighter/preview/araña_gato_preview.tscn" id="17_qa3ts"]
+[ext_resource type="Texture2D" uid="uid://bmj2vprfk5yoe" path="res://scenes/fighter/araña_gato/araña_gato.png" id="18_qa3ts"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_66j2l"]
 atlas = ExtResource("3_ymkx8")
@@ -72,8 +75,9 @@ script = ExtResource("1_eqpie")
 texture = SubResource("AtlasTexture_1ledm")
 name = "Fish With Lipstick"
 color = Color(0.023529412, 0.34901962, 0.46666667, 1)
+preview_scene = ExtResource("11_j8p4w")
 scene = ExtResource("8_r8lor")
-name_attack = "jab"
+name_attack = "flop"
 name_special = "harpoon"
 metadata/_custom_type_script = "uid://ecnpluubb3ev"
 
@@ -86,21 +90,25 @@ script = ExtResource("1_eqpie")
 texture = SubResource("AtlasTexture_acsd4")
 name = "Astronaut"
 color = Color(0.25882354, 0.11764706, 0.37254903, 1)
+preview_scene = ExtResource("14_41kdc")
 scene = ExtResource("13_37t7o")
 name_attack = "stargun"
 name_special = "parry"
 metadata/_custom_type_script = "uid://ecnpluubb3ev"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_41kdc"]
-atlas = ExtResource("16_j8p4w")
+atlas = ExtResource("18_qa3ts")
 region = Rect2(0, 0, 20, 0)
 
 [sub_resource type="Resource" id="Resource_qa3ts"]
 script = ExtResource("1_eqpie")
 texture = SubResource("AtlasTexture_41kdc")
-name = "kitten"
+name = "kitty"
 color = Color(0.36078432, 0.19607843, 0.13333334, 1)
-scene = ExtResource("15_acsd4")
+preview_scene = ExtResource("17_qa3ts")
+scene = ExtResource("17_41kdc")
+name_attack = "claw"
+name_special = "soul suck"
 metadata/_custom_type_script = "uid://ecnpluubb3ev"
 
 [resource]

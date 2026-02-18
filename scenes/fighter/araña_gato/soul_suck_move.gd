@@ -52,7 +52,7 @@ func _spit(body: Fighter) -> void:
 	body.grabbed = false
 	body.visible = true
 	body.position = fighter.position
-	body.apply_override_force(spit_force * Vector2(fighter.get_flip_sign(), 1))
+	body.velocity = spit_force * Vector2(fighter.get_flip_sign(), 1) * body.attack_scale
 	body.attack_scale *= 2
 	
 	fighter.set_velocity_scale(1)

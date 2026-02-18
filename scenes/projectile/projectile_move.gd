@@ -2,6 +2,9 @@ class_name ProjectileMove extends Move
 
 @export var scene: PackedScene
 
+func _ready() -> void:
+	top_level = true
+
 func run_move() -> void:
 	Effects.screen_shake(3)
 	

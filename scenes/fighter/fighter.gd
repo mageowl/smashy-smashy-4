@@ -69,7 +69,7 @@ func _gravity(delta: float) -> void:
 		elif velocity.y < 0:
 			g = jump_gravity
 		
-		velocity.y += g * delta * velocity_scale
+		velocity.y += g * delta * velocity_scale * gravity_scale
 		
 		if not playing_move_anim:
 			if velocity.y < 0: animation.play("jump")

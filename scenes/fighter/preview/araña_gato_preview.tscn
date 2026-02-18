@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://vcvr6cv87lf"]
+
+[ext_resource type="Texture2D" uid="uid://bmj2vprfk5yoe" path="res://scenes/fighter/araña_gato/araña_gato.png" id="1_pjbw0"]
+[ext_resource type="Script" uid="uid://dwqomqodfrqr3" path="res://scenes/fighter/preview/fighter_preview.gd" id="1_tqh1n"]
+
+[sub_resource type="Animation" id="Animation_k6f15"]
+resource_name = "play"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(7.450581e-09, 0.10000001, 0.20000002, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_ao7dc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_woll7"]
+_data = {
+&"RESET": SubResource("Animation_ao7dc"),
+&"play": SubResource("Animation_k6f15")
+}
+
+[node name="ArañaGatoPreview" type="Sprite2D" node_paths=PackedStringArray("animation_player")]
+texture = ExtResource("1_pjbw0")
+hframes = 15
+script = ExtResource("1_tqh1n")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_woll7")
+}

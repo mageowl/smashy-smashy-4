@@ -2,13 +2,8 @@ extends CanvasLayer
 
 signal accepted
 
-@export var next_scene: PackedScene
-
 var open := false
-
-func _ready() -> void:
-	if next_scene == null:
-		$Panel/Label.text = "Quit?"
+var should_quit_app := false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -18,6 +13,10 @@ func _input(event: InputEvent) -> void:
 			show()
 			%Yes.grab_focus()
 			get_tree().paused = true
+			$Panel.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_INHERITED
+			
+			should_quit_app = Effects.transition.history.is_empty()
+			$Panel/Label.text = "Quit?" if should_quit_app else "Exit?"
 
 func _on_no_pressed() -> void:
 	_close()
@@ -25,15 +24,18 @@ func _on_no_pressed() -> void:
 func _on_yes_pressed() -> void:
 	get_tree().paused = false
 	visible = false
+	open = false
 	accepted.emit()
-	if next_scene == null:
+	if should_quit_app:
 		await Effects.transition.anim_in()
 		Effects.get_tree().quit()
 	else:
-		Effects.transition.to_packed(next_scene)
+		Effects.transition.go_back()
+		Game.reset()
 
 func _close() -> void:
 	hide()
 	open = false
 	$Panel.release_focus()
+	$Panel.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 	get_tree().paused = false

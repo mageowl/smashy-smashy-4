@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://5cvp62wsehjt"]
 
-[ext_resource type="Script" uid="uid://dxxaau4vf85v1" path="res://scenes/fighter/arana-gato/soul_suck_move.gd" id="1_g5hdt"]
+[ext_resource type="Script" uid="uid://dxxaau4vf85v1" path="res://scenes/fighter/araña_gato/soul_suck_move.gd" id="1_g5hdt"]
 [ext_resource type="Texture2D" uid="uid://cibr0su4caji6" path="res://particle_small.png" id="2_8in26"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g5hdt"]

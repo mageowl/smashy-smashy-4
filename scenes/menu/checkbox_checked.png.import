@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmj2vprfk5yoe"
-path="res://.godot/imported/arana-gato.png-afcbc9734eca5a09ca1ba09d6b5c9fb4.ctex"
+uid="uid://d273kkejfh0d7"
+path="res://.godot/imported/checkbox_checked.png-453f22470a8c257ff06c6301f000c35a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/fighter/arana-gato/arana-gato.png"
-dest_files=["res://.godot/imported/arana-gato.png-afcbc9734eca5a09ca1ba09d6b5c9fb4.ctex"]
+source_file="res://scenes/menu/checkbox_checked.png"
+dest_files=["res://.godot/imported/checkbox_checked.png-453f22470a8c257ff06c6301f000c35a.ctex"]
 
 [params]
 

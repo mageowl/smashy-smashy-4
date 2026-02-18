@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://l0dhqj3jj66a"]
+[gd_scene load_steps=20 format=3 uid="uid://l0dhqj3jj66a"]
 
 [ext_resource type="PackedScene" uid="uid://yxgu1btdghfc" path="res://scenes/fighter/fighter.tscn" id="1_5sndf"]
 [ext_resource type="Texture2D" uid="uid://87l4ocqtu4e8" path="res://oldAssets/fighter/monk.png" id="2_d5acp"]
@@ -116,6 +116,17 @@ gradient = SubResource("Gradient_6munl")
 width = 20
 height = 2
 
+[sub_resource type="Gradient" id="Gradient_5l717"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gwgwf"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_5l717")
+width = 8
+height = 1
+
 [node name="Monk" instance=ExtResource("1_5sndf")]
 color = Color(0.09411765, 0.6117647, 0.76862746, 1)
 animation_player = NodePath("AnimationPlayer")
@@ -150,3 +161,6 @@ cooldown = 3.0
 
 [node name="CooldownBar" parent="." index="7"]
 texture_progress = SubResource("GradientTexture2D_x0hhq")
+
+[node name="CooldownBar" parent="Marker" index="0"]
+texture_progress = SubResource("GradientTexture2D_gwgwf")

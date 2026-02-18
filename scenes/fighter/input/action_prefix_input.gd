@@ -1,9 +1,18 @@
 class_name ActionPrefixInput extends GenericInput
 
 var prefix: String
+var move_prompt: Texture
+var attack_prompt: Texture
 
-func _init(prefix: String) -> void:
+func _init(prefix: String, move_prompt: Texture, attack_prompt: Texture) -> void:
 	self.prefix = prefix
+	self.move_prompt = move_prompt
+	self.attack_prompt = attack_prompt
+
+func get_attack_prompt() -> Texture:
+	return attack_prompt
+func get_move_prompt() -> Texture:
+	return move_prompt
 
 func is_up_pressed() -> bool:
 	return Input.is_action_pressed(prefix + "_up")

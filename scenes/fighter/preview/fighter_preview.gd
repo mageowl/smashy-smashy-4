@@ -1,6 +1,7 @@
 extends Sprite2D
 
-@export_node_path("AnimationPlayer") var animation_player: NodePath
+@export var animation_player: AnimationPlayer
+@export var flip_via_scale: Array[Node2D]
 @export var fall_frame := -1
 @export var jump_frame := -1
 
@@ -11,10 +12,13 @@ extends Sprite2D
 
 @onready var floor_pos := position.y
 var velocity := 0.0
-@onready var anim_player: AnimationPlayer = get_node_or_null(animation_player)
 
 func _ready() -> void:
-	if anim_player != null: anim_player.play("play")
+	if animation_player != null: animation_player.play("play")
+	
+	if flip_h:
+		for node in flip_via_scale:
+			node.scale.x *= -1
 
 func jump() -> void:
 	velocity = -jump_velocity
@@ -22,7 +26,6 @@ func jump() -> void:
 func slam() -> void:
 	velocity = 0
 	position.y = floor_pos
-
 
 func _process(delta: float) -> void:
 	if velocity != 0 or position.y != floor_pos:
@@ -38,6 +41,6 @@ func _process(delta: float) -> void:
 			position.y = floor_pos
 			velocity = 0
 			
-			if anim_player != null:
-				anim_player.stop()
-				anim_player.play("play")
+			if animation_player != null:
+				#anim_player.stop()
+				animation_player.play("play")

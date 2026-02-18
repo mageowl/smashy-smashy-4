@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5gascewsrq70"]
+
+[ext_resource type="Theme" uid="uid://b5yk65c4e76r" path="res://theme.tres" id="1_00aj6"]
+[ext_resource type="PackedScene" uid="uid://c302ur1sqsibl" path="res://scenes/background/background.tscn" id="1_lcmu4"]
+[ext_resource type="PackedScene" uid="uid://g5dfd0r0attm" path="res://scenes/menu/options/slider_option.tscn" id="3_tbffl"]
+[ext_resource type="PackedScene" uid="uid://cyym8v4od84ih" path="res://scenes/menu/options/boolean_option.tscn" id="4_3bp8b"]
+[ext_resource type="Environment" uid="uid://blxa5rg0db2i0" path="res://environment.tres" id="5_1tlgi"]
+[ext_resource type="Script" uid="uid://7yh2utp82204" path="res://options_environment.gd" id="6_xh1au"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_00aj6")
+
+[node name="Background" parent="." instance=ExtResource("1_lcmu4")]
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0.5019608)
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+
+[node name="Brightness" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_tbffl")]
+layout_mode = 2
+property = &"brightness"
+label = "Brightness"
+max_value = 2.0
+
+[node name="SFXVolume" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_tbffl")]
+layout_mode = 2
+property = &"sfx_volume"
+label = "SFX volume"
+max_value = 2.0
+
+[node name="HighContrastBackground" parent="PanelContainer/VBoxContainer" instance=ExtResource("4_3bp8b")]
+layout_mode = 2
+property = &"high_contrast_bg"
+label = "High contrast background"
+
+[node name="ScreenShake" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_tbffl")]
+layout_mode = 2
+property = &"screen_shake_multiplier"
+label = "Screen shake"
+max_value = 2.0
+
+[node name="FreezeFrame" parent="PanelContainer/VBoxContainer" instance=ExtResource("4_3bp8b")]
+layout_mode = 2
+property = &"disable_freeze_frame"
+label = "Disable freeze frames"
+
+[node name="MotionBackground" parent="PanelContainer/VBoxContainer" instance=ExtResource("4_3bp8b")]
+layout_mode = 2
+property = &"disable_background_motion"
+label = "Disable background motion"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("5_1tlgi")
+script = ExtResource("6_xh1au")
+metadata/_custom_type_script = "uid://7yh2utp82204"

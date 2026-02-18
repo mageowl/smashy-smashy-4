@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cdsk6o7a8yvl0" path="res://scenes/floor/floor.tscn" id="2_v5dby"]
 [ext_resource type="Texture2D" uid="uid://caslktulpmdsj" path="res://particle.png" id="4_bq33v"]
 [ext_resource type="FontFile" uid="uid://6yj1eecbsen6" path="res://paxel.ttf" id="5_bq33v"]
-[ext_resource type="PackedScene" uid="uid://bsssija37vh53" path="res://scenes/menu/character_select/character_select.tscn" id="7_bq33v"]
-[ext_resource type="PackedScene" uid="uid://crhp18airi8du" path="res://scenes/menu/quit_prompt.tscn" id="7_j2gmx"]
+[ext_resource type="Environment" uid="uid://blxa5rg0db2i0" path="res://environment.tres" id="6_t5ptc"]
+[ext_resource type="Script" uid="uid://7yh2utp82204" path="res://options_environment.gd" id="7_bq33v"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ppyta"]
 blend_mode = 1
@@ -170,7 +170,7 @@ offset_bottom = 30.0
 grow_horizontal = 2
 color = Color(0.28731406, 0.2873141, 0.28731406, 1)
 
-[node name="QuitPrompt" parent="." instance=ExtResource("7_j2gmx")]
-next_scene = ExtResource("7_bq33v")
-
-[connection signal="accepted" from="QuitPrompt" to="." method="_on_quit_prompt_accepted"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("6_t5ptc")
+script = ExtResource("7_bq33v")
+metadata/_custom_type_script = "uid://7yh2utp82204"

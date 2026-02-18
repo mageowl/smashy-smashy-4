@@ -1,0 +1,5 @@
+[gd_resource type="Environment" format=3 uid="uid://blxa5rg0db2i0"]
+
+[resource]
+background_mode = 3
+adjustment_enabled = true

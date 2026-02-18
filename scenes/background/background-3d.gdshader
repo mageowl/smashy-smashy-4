@@ -5,10 +5,14 @@ uniform vec3 color1 : source_color;
 uniform vec3 color2 : source_color;
 uniform vec3 color3 : source_color;
 
+void vertex() {
+	//VERTEX.z += sin(TIME / 5.0) / 8.0;
+}
+
 void fragment() {
-	float xoffset = TIME * 0.4 + (UV.y) * 60.0;
+	float xoffset = TIME * 0.0 + (UV.y) * 50.0;
 	bool a = mod(UV.x * 12.0 + xoffset, 1.0) > 0.5;
-	bool b = mod(UV.y * 100.0 + TIME * 0.3, 1.0) > 0.5;
+	bool b = mod(UV.y * 30.0 + TIME * 0.3, 1.0) > 0.5;
 	
 	if (a != b) {
 		ALBEDO = color1;

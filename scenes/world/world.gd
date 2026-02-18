@@ -67,6 +67,3 @@ func _process(_delta: float) -> void:
 	
 	var center := get_viewport_rect().size / 2
 	$Camera2D.position.x = center.x + (avg_pos.x - center.x) / 12
-
-func _on_quit_prompt_accepted() -> void:
-	Game.reset()

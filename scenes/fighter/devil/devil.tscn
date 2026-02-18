@@ -137,6 +137,8 @@ height = 1
 [node name="Devil" instance=ExtResource("1_5enma")]
 color = Color(0.7372549, 0.19607843, 0.19607843, 1)
 animation_player = NodePath("AnimationPlayer")
+gravity = 1200.0
+jump_gravity = 800.0
 moveset_attack = NodePath("PokeMove")
 moveset_special = NodePath("DashMove")
 
@@ -149,6 +151,7 @@ libraries = {
 
 [node name="DashMove" type="Node2D" parent="." index="4"]
 script = ExtResource("3_jhefm")
+cooldown = 0.2
 metadata/_custom_type_script = "uid://bdueyt4ybtdn5"
 
 [node name="CooldownBar" parent="." index="6"]

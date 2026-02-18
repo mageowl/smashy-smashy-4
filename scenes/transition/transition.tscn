@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://d08jmb4l28u7o"]
 
 [ext_resource type="Shader" uid="uid://cqj6nifeqa5of" path="res://scenes/transition/transition.gdshader" id="1_kg44o"]
-[ext_resource type="Texture2D" uid="uid://cq612b0l3ox00" path="res://scenes/transition/accordian.png" id="3_bqlhp"]
+[ext_resource type="Texture2D" uid="uid://dqfchfwhwfwex" path="res://scenes/transition/angular.png" id="3_bqlhp"]
 [ext_resource type="Script" uid="uid://bgtvtkmqtvyu" path="res://scenes/transition/transition.gd" id="3_lnqlw"]
 
 [sub_resource type="Animation" id="Animation_j2gmx"]
@@ -118,4 +118,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("3_bqlhp")

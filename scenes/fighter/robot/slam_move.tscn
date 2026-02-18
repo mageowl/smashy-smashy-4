@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgr0elvxus3ap"]
+[gd_scene load_steps=6 format=3 uid="uid://bgr0elvxus3ap"]
 
 [ext_resource type="Script" uid="uid://bgy0s5hgld6p0" path="res://scenes/fighter/robot/slam_move.gd" id="1_qhyk2"]
 [ext_resource type="Shader" uid="uid://bmuklqp0esis6" path="res://scenes/fighter/robot/slam_move_particles.gdshader" id="2_fnukq"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fnukq"]
+blend_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhyk2"]
 size = Vector2(40, 60)
@@ -16,6 +19,7 @@ metadata/_custom_type_script = "uid://bgy0s5hgld6p0"
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
+material = SubResource("CanvasItemMaterial_fnukq")
 points = PackedVector2Array(0, 0, 0, -24)
 width = 8.0
 

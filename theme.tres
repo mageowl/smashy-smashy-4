@@ -1,0 +1,84 @@
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://b5yk65c4e76r"]
+
+[ext_resource type="FontFile" uid="uid://6yj1eecbsen6" path="res://paxel.ttf" id="1_cjfk0"]
+[ext_resource type="Texture2D" uid="uid://vi42848e4ctl" path="res://scenes/menu/rect.png" id="2_vj6dk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3alp"]
+content_margin_left = 2.0
+content_margin_right = 1.0
+bg_color = Color(0.3019608, 0.3019608, 0.3019608, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_110ce"]
+content_margin_left = 2.0
+content_margin_right = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjfk0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vj6dk"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cjfk0"]
+color = Color(0.3019608, 0.3019608, 0.3019608, 1)
+
+[sub_resource type="Gradient" id="Gradient_cjfk0"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.53333336, 0.53333336, 0.53333336, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vj6dk"]
+gradient = SubResource("Gradient_cjfk0")
+width = 2
+height = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_05tig"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rmny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mihib"]
+content_margin_left = 0.0
+content_margin_top = 1.0
+content_margin_right = 0.0
+content_margin_bottom = 1.0
+bg_color = Color(0.3019608, 0.3019608, 0.3019608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7r34q"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_vj6dk")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 8
+Button/fonts/font = ExtResource("1_cjfk0")
+Button/styles/focus = SubResource("StyleBoxFlat_n3alp")
+Button/styles/hover = SubResource("StyleBoxFlat_n3alp")
+Button/styles/normal = SubResource("StyleBoxEmpty_110ce")
+Button/styles/pressed = SubResource("StyleBoxFlat_n3alp")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_cjfk0")
+CheckBox/styles/hover = null
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_vj6dk")
+HSeparator/styles/separator = SubResource("StyleBoxLine_cjfk0")
+HSlider/icons/grabber = SubResource("GradientTexture2D_vj6dk")
+HSlider/icons/grabber_highlight = SubResource("GradientTexture2D_vj6dk")
+HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_05tig")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_1rmny")
+HSlider/styles/slider = SubResource("StyleBoxFlat_mihib")
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("1_cjfk0")
+LinkButton/colors/font_color = Color(1, 1, 1, 1)
+LinkButton/colors/font_focus_color = Color(1, 1, 1, 1)
+LinkButton/colors/font_hover_color = Color(1, 1, 1, 1)
+LinkButton/constants/underline_spacing = 0
+LinkButton/font_sizes/font_size = 8
+LinkButton/fonts/font = ExtResource("1_cjfk0")
+Panel/styles/panel = SubResource("StyleBoxTexture_7r34q")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_7r34q")

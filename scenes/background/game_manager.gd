@@ -9,7 +9,7 @@ const IGNORED_NAMES: Array[String] = [
 const NINTENDO_NAMES: Array[String] = [
 	"Pro Controller",
 	"Joycon",
-	"8bitdo"
+	"8bitdo",
 ]
 
 enum GameMode {
@@ -42,21 +42,35 @@ func update_input(game_mode: GameMode) -> void:
 			for i in range(controllers.size() - 1, -1, -1):
 				if not _valid_controller(controllers[i]):
 					controllers.remove_at(i)
+					continue
 				
 				var n := false
 				for word in NINTENDO_NAMES:
-					if Input.get_joy_name(i).contains(word):
+					if Input.get_joy_name(i).containsn(word):
 						n = true
 						print_debug("Detected joypad " + str(i) + " to have switched A and B buttons.")
 						break
 				is_nintendo.push_back(n)
 			
+			print(is_nintendo)
 			if controllers.size() >= 2:
 				inputs = [ControllerInput.new(controllers[0], is_nintendo[0]), ControllerInput.new(controllers[1], is_nintendo[1])]
 			elif controllers.size() == 1:
-				inputs = [ControllerInput.new(controllers[0], is_nintendo[0]), ActionPrefixInput.new("solo")]
+				inputs = [
+					ControllerInput.new(controllers[0], is_nintendo[0]),
+					ActionPrefixInput.new("solo",
+						load("res://scenes/menu/character_select/buttons/move-wasd.png"),
+						load("res://scenes/menu/character_select/buttons/attack-jk.png"))
+				]
 			else:
-				inputs = [ActionPrefixInput.new("p1"), ActionPrefixInput.new("p2")]
+				inputs = [
+					ActionPrefixInput.new("p1",
+						load("res://scenes/menu/character_select/buttons/move-wasd.png"),
+						load("res://scenes/menu/character_select/buttons/attack-vb.png")),
+					ActionPrefixInput.new("p2",
+						load("res://scenes/menu/character_select/buttons/move-arrows.png"),
+						load("res://scenes/menu/character_select/buttons/attack-angles.png"))
+				]
 		_:
 			assert(false, "Unreachable")
 

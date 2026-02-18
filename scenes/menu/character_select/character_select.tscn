@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bsssija37vh53"]
+[gd_scene load_steps=18 format=3 uid="uid://bsssija37vh53"]
 
 [ext_resource type="Script" uid="uid://g1v07tajq26g" path="res://scenes/menu/character_select/character_select.gd" id="1_vffxf"]
 [ext_resource type="PackedScene" uid="uid://c302ur1sqsibl" path="res://scenes/background/background.tscn" id="2_0frw4"]
@@ -8,8 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://clbfkm7kb2qml" path="res://oldAssets/selector_p2.png" id="5_nbeft"]
 [ext_resource type="Texture2D" uid="uid://bgqwnfq2u4ru0" path="res://scenes/menu/character_select/overlay_left.png" id="6_jl25w"]
 [ext_resource type="Texture2D" uid="uid://1xoorxto630i" path="res://scenes/menu/character_select/overlay_right.png" id="7_mfswr"]
-[ext_resource type="PackedScene" uid="uid://crhp18airi8du" path="res://scenes/menu/quit_prompt.tscn" id="8_jn812"]
-[ext_resource type="PackedScene" uid="uid://ck80dviraq5o2" path="res://scenes/menu/main_menu/main_menu.tscn" id="9_bhgn4"]
+[ext_resource type="Texture2D" uid="uid://br2tuw2q20m3r" path="res://scenes/menu/character_select/buttons/move-wasd.png" id="8_bhgn4"]
+[ext_resource type="Texture2D" uid="uid://buwnrrlsxv8an" path="res://scenes/menu/character_select/buttons/attack-vb.png" id="9_xlkkj"]
+[ext_resource type="Texture2D" uid="uid://bq1qektnxqune" path="res://scenes/menu/character_select/buttons/attack-controller.png" id="11_c8q25"]
+[ext_resource type="Texture2D" uid="uid://dcd1ipq3cjney" path="res://scenes/menu/character_select/buttons/move-controller.png" id="12_tq0m0"]
+[ext_resource type="Environment" uid="uid://blxa5rg0db2i0" path="res://environment.tres" id="13_tq0m0"]
+[ext_resource type="Script" uid="uid://7yh2utp82204" path="res://options_environment.gd" id="14_20gjw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m7y3p"]
 font = ExtResource("3_nbeft")
@@ -58,9 +62,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -46.0
+offset_left = -52.0
 offset_top = -31.0
-offset_right = 46.0
+offset_right = 52.0
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -132,19 +136,19 @@ label_settings = SubResource("LabelSettings_jn812")
 
 [node name="Attack" type="Label" parent="FighterP1"]
 layout_mode = 0
-offset_left = 57.0
-offset_top = 211.0
-offset_right = 94.0
-offset_bottom = 219.0
+offset_left = 58.0
+offset_top = 207.0
+offset_right = 95.0
+offset_bottom = 217.0
 text = "poke"
 label_settings = SubResource("LabelSettings_jn812")
 
 [node name="Special" type="Label" parent="FighterP1"]
 layout_mode = 0
-offset_left = 57.0
+offset_left = 58.0
 offset_top = 225.0
-offset_right = 94.0
-offset_bottom = 233.0
+offset_right = 95.0
+offset_bottom = 235.0
 text = "dash"
 label_settings = SubResource("LabelSettings_jn812")
 
@@ -153,8 +157,7 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1.0
-offset_right = 114.0
+offset_right = 113.0
 offset_bottom = 240.0
 grow_horizontal = 0
 
@@ -197,9 +200,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -93.0
-offset_top = -29.0
+offset_top = -34.0
 offset_right = -56.0
-offset_bottom = -21.0
+offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "poke"
@@ -214,7 +217,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -93.0
-offset_top = -15.0
+offset_top = -17.0
 offset_right = -56.0
 offset_bottom = -7.0
 grow_horizontal = 0
@@ -223,5 +226,27 @@ text = "dash"
 label_settings = SubResource("LabelSettings_jn812")
 horizontal_alignment = 2
 
-[node name="QuitPrompt" parent="." instance=ExtResource("8_jn812")]
-next_scene = ExtResource("9_bhgn4")
+[node name="P1MoveControls" type="Sprite2D" parent="."]
+position = Vector2(4, 208)
+texture = ExtResource("8_bhgn4")
+centered = false
+
+[node name="P1AttackControls" type="Sprite2D" parent="."]
+position = Vector2(40, 205)
+texture = ExtResource("9_xlkkj")
+centered = false
+
+[node name="P2AttackControls" type="Sprite2D" parent="."]
+position = Vector2(345, 203)
+texture = ExtResource("11_c8q25")
+centered = false
+
+[node name="P2MoveControls" type="Sprite2D" parent="."]
+position = Vector2(360, 206)
+texture = ExtResource("12_tq0m0")
+centered = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("13_tq0m0")
+script = ExtResource("14_20gjw")
+metadata/_custom_type_script = "uid://7yh2utp82204"

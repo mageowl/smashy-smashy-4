@@ -7,7 +7,9 @@ var device_id: int
 var is_nintendo: bool
 
 func _init(device_id: int, is_nintendo: bool) -> void:
-	super("g" + str(device_id))
+	super("g" + str(device_id),
+		load("res://scenes/menu/character_select/buttons/move-controller.png"),
+		load("res://scenes/menu/character_select/buttons/attack-controller.png"))
 	self.device_id = device_id
 	self.is_nintendo = is_nintendo
 	
@@ -27,6 +29,7 @@ func _init(device_id: int, is_nintendo: bool) -> void:
 		_add_dpad_or_stick("attack", JoyButton.JOY_BUTTON_X, JoyAxis.JOY_AXIS_TRIGGER_LEFT, 1)
 		_add_dpad_or_stick("special", JoyButton.JOY_BUTTON_Y, JoyAxis.JOY_AXIS_TRIGGER_RIGHT, 1)
 		
+		print_debug(is_nintendo)
 		if is_nintendo:
 			_add_button("accept", JOY_BUTTON_B)
 		else:

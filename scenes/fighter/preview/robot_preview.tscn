@@ -86,7 +86,7 @@ _data = {
 &"play": SubResource("Animation_6bjrq")
 }
 
-[node name="RobotPreview" type="Sprite2D"]
+[node name="RobotPreview" type="Sprite2D" node_paths=PackedStringArray("animation_player")]
 texture = ExtResource("1_6ysr5")
 hframes = 11
 script = ExtResource("2_umkvt")

@@ -17,6 +17,10 @@ var p2_preview: Sprite2D = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Game.update_input(Game.GameMode.LOCAL_1V1)
+	$P1MoveControls.texture = Game.inputs[0].get_move_prompt()
+	$P1AttackControls.texture = Game.inputs[0].get_attack_prompt()
+	$P2MoveControls.texture = Game.inputs[1].get_move_prompt()
+	$P2AttackControls.texture = Game.inputs[1].get_attack_prompt()
 	
 	for fighter: FighterConfig in ROSTER:
 		var img := TextureRect.new()
@@ -64,7 +68,7 @@ func _process(delta: float) -> void:
 	elif $StartPrompt.visible and Input.is_action_just_pressed("start"):
 		p1_selecting = true
 		p2_selecting = true
-		Effects.transition.to("res://scenes/world/world.tscn")
+		Effects.transition.to_packed(preload("uid://cneliatsctl38"))
 
 func _move_p1(direction: Vector2i) -> void:
 	if $SelectorP1.visible:
@@ -93,19 +97,21 @@ func _select_p1() -> void:
 			$FighterP1/Name.text = "the " + fighter.name.to_lower()
 			$FighterP1/Attack.text = fighter.name_attack
 			$FighterP1/Special.text = fighter.name_special
-			
+			$P1MoveControls.self_modulate = Color.BLACK
+			$P1AttackControls.self_modulate = Color.BLACK
+
 			if fighter.preview_scene != null:
 				p1_preview = fighter.preview_scene.instantiate()
 				p1_preview.position = Vector2(56.5, 120)
 				$FighterP1.add_child(p1_preview)
 			
 			p1_selecting = true
-			var tween := create_tween()
+			var tween := create_tween().set_parallel()
 			tween.tween_property($FighterP1, "position:x", 0, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-			tween.parallel().tween_property($FighterP1/Background, "color", fighter.color, 0.1) \
+			tween.tween_property($FighterP1/Background, "color", fighter.color, 0.1) \
 				.set_custom_interpolator(floor) \
 				.from(Color.WHITE)
-			
+
 			await tween.finished
 			p1_selecting = false
 			_p1_selected.emit()
@@ -114,12 +120,15 @@ func _select_p1() -> void:
 	else:
 		if p1_selecting: await _p1_selected
 		$SelectorP1.show()
+		$StartPrompt.hide()
 		
 		Game.player1_fighter = null
 		
 		p1_selecting = true
 		var tween := create_tween()
 		tween.tween_property($FighterP1, "position:x", -113, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		$P1MoveControls.self_modulate = Color.WHITE
+		$P1AttackControls.self_modulate = Color.WHITE
 		await tween.finished
 		
 		$FighterP1/Background.color = Color.WHITE
@@ -143,7 +152,9 @@ func _select_p2() -> void:
 			$FighterP2/Name.text = "the " + fighter.name.to_lower()
 			$FighterP2/Attack.text = fighter.name_attack
 			$FighterP2/Special.text = fighter.name_special
-			
+			$P2MoveControls.self_modulate = Color.BLACK
+			$P2AttackControls.self_modulate = Color.BLACK
+
 			if fighter.preview_scene != null:
 				p2_preview = fighter.preview_scene.instantiate()
 				p2_preview.position = Vector2(56.5, 120)
@@ -151,26 +162,28 @@ func _select_p2() -> void:
 				$FighterP2.add_child(p2_preview)
 			
 			p2_selecting = true
-			var tween := create_tween()
+			var tween := create_tween().set_parallel()
 			tween.tween_property($FighterP2, "position:x", get_viewport_rect().size.x - 113, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-			tween.parallel().tween_property($FighterP2/Background, "color", fighter.color, 0.2) \
+			tween.tween_property($FighterP2/Background, "color", fighter.color, 0.2) \
 				.set_custom_interpolator(floor) \
 				.from(Color.WHITE)
 			
 			await tween.finished
 			p2_selecting = false
 			_p2_selected.emit()
-			
 			_check_ready()
 	else:
 		if p2_selecting: await _p2_selected
 		$SelectorP2.show()
+		$StartPrompt.hide()
 		
 		Game.player2_fighter = null
 		
 		p2_selecting = true
 		var tween := create_tween()
 		tween.tween_property($FighterP2, "position:x", get_viewport_rect().size.x, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		$P2MoveControls.self_modulate = Color.WHITE
+		$P2AttackControls.self_modulate = Color.WHITE
 		await tween.finished
 		
 		$FighterP2/Background.color = Color.WHITE
@@ -180,6 +193,7 @@ func _select_p2() -> void:
 		
 		p2_selecting = false
 		_p2_selected.emit()
+	
 
 func _check_ready() -> void:
 	$StartPrompt.visible = not $SelectorP1.visible and not $SelectorP2.visible
